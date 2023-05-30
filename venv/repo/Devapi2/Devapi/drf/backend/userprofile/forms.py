@@ -3,7 +3,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from students.models import Student
 from students.models import Student
-from snippets.serializers import StudentSerializer
 from django.forms import ModelForm
 
 

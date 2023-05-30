@@ -1,28 +1,23 @@
 from django.db import models
-import algoliasearch
 from django.conf import settings
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.core.exceptions import ValidationError
-from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
-ext_validator = FileExtensionValidator(
-    accept=['application/msword', 'image/jpeg', 'image/png', 'text/plain', 'application/pdf'],
-)
+from django.contrib.auth.models import User
 
-def validateFile(file):
-    type = magic.from_file(file)
 
-    if type == "application/msword":
-        pass
-    elif type == "application/text":
-        pass
-    else:
-        raise ValidationError(
-            ("%(file) This file type is not allowed")
-        )
+import magic
+ext_validator = FileExtensionValidator(['jpg', 'png', 'text', 'pdf'])
 
+def validate_file_mimetype(file):
+    accept = ['application/msword', 'text/plain', 'application/pdf', 'image/jpeg', 'image/png']
+    fileMimeType = magic.from_buffer(file.read(1024), mime=True)
+    print(fileMimeType)
+    if fileMimeType not in accept:
+        raise ValidationError("Unsupported file type")
 
 # Create your models here.
 class Submission(models.Model):
-    submissionUpload = models.FileField(upload_to="uploads/%Y/%m/%d/", validators=[validateFile])
+    submissionUpload = models.FileField(upload_to="uploads/%Y/%m/%d/", validators=[ext_validator, validate_file_mimetype])
+    students = models.ManyToManyField(User)

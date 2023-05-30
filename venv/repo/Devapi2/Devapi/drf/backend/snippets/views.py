@@ -5,27 +5,19 @@ from django.shortcuts import redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 # Create your views here.
-from rest_framework.decorators import api_view # new
-from rest_framework.response import Response # new
-from rest_framework.reverse import reverse # new
-from rest_framework import status
-from rest_framework import generics, permissions
+
 from .models import Snippet
 from students.models import Student
 from assignments.models import Assignment
 from forum.models import Forum
 from comments.models import Comment
 from django.contrib.auth.models import User
-from .serializers import StudentSerializer, ForumSerializer, AssignmentSerializer
-from .permissions import UserIsOwner
 from userprofile.forms import classChoices
-from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
+
 from forum.forms import ForumCreationForm
 from comments.form import CommentCreationForm
 from django.shortcuts import get_object_or_404
-from rest_framework.renderers import TemplateHTMLRenderer
-from rest_framework.views import APIView
+
 
 #class StudentViewset(viewsets.ModelViewSet):
 
@@ -109,8 +101,6 @@ def forumDetail(request, forum_id):
 
 
 
-
-@api_view(['GET','POST']) # new
 def progress(request):
     current_user = request.user
     id = current_user.id
@@ -155,7 +145,7 @@ def assignments(request):
 
     return render(request, 'assignments.html', context)
 
-@api_view(['GET','POST']) # new
+
 def createNewForum(request):
     context = {}
     id = request.user.id
@@ -177,7 +167,7 @@ def createNewForum(request):
     return render(request, 'create-forum.html', context)
 
 
-@api_view(['GET','POST']) # new
+
 def comments(request, forum_id, comment_id):
     context = {}
     id = request.user.id
