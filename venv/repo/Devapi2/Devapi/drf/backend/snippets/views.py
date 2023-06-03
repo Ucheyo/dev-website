@@ -16,8 +16,11 @@ from userprofile.forms import classChoices
 
 from forum.forms import ForumCreationForm
 from comments.form import CommentCreationForm
+from assignments.form import AssignmentCreationForm
+from submissions.form import SubmissionCreationForm
 from django.shortcuts import get_object_or_404
-
+import mimetypes
+from django.http import HttpResponse
 
 #class StudentViewset(viewsets.ModelViewSet):
 
@@ -81,7 +84,7 @@ def forumDetail(request, forum_id):
     context = {}
     forum = Forum.objects.get(id=forum_id)
     #forum = Forum.students.get_object
-    myComments = Comment.objects.filter(forumID=forum_id)
+    myComments = Comment.objects.filter(forumID=forum_id) #filter lets you be more specific and get only relevant values
     commentIdListIntegers  = []  
     testInt = [1,2,3,4,5]
     # for i in range(comment_id_list):
@@ -134,17 +137,60 @@ def progress(request):
     return render(request, 'progress.html',context)
 
 
-def assignments(request):
-    students= Student.objects.all()
+def createAssignment(request):
+    if request.method =='POST':
+        form = AssignmentCreationForm(request.POST )
+
+        if form.is_valid():
+            form.save()
+        return redirect('frontpage')
+    else:
+        form = AssignmentCreationForm()
+
+
+    return render(request, 'create-assignment.html', {'form':form})
+
+def downloadAssignment(request, assignment_id):
+    file = Assignment.objects.get(id=assignment_id)
+
+    filePath = file.assignmentUpload.path
+    fileName = file.assignmentUpload.name
+
+
+    fl = open(filePath, "r")
+    mime_type, _ = mimetypes.guess_type(filePath)
+    response = HttpResponse(fl, content_type=mime_type)# create an HttpResponse object and set the file content as the response content.
+    response['Content-Disposition'] = f"attachment; filename={fileName}"
+    redirect('assignments-list')
+    # return render(request, 'assignments-list.html', response )  
+    return response
+
+def assignmentList(request):
+    assignment_list = Assignment.objects.all()
+    return render(request, "assignments-list.html", {"assignment_list":assignment_list})
+
+def submission(request, assignment_id):
+    context = {}
     id = request.user.id
-    myStudent = Student.objects.get(id=id)    
-    context = {
-         'students': students,
-         'currentStudent': myStudent         
-    }
+    assignment = Assignment.objects.get(id=assignment_id)
+    myStudent = Student.objects.get(id=id)
+    context['assignment'] = assignment
+    if request.method =='POST':
+        form = AssignmentCreationForm(request.POST)
 
-    return render(request, 'assignments.html', context)
-
+        if form.is_valid():
+        
+            #myForm = form.save(commit=False)
+            myForm = form.save(commit=False)
+            myForm.students = myStudent.user
+            myForm.assignments = assignment
+            myForm.save()
+            context['form'] = myForm
+        return redirect('assignments-list')
+    else:
+        form = SubmissionCreationForm()
+        context['form'] = form 
+    return render(request, 'submission.html', context)   
 
 def createNewForum(request):
     context = {}

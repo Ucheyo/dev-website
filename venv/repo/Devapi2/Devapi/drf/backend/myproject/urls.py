@@ -18,7 +18,7 @@ from django.urls import path
 from django.urls import include, path
 from django.contrib.auth import views # built in views for login and logiut
 
-from snippets.views import frontpage, forum, progress, assignments, forumDetail, createNewForum, comments
+from snippets.views import frontpage, forum, progress, createAssignment, forumDetail, createNewForum, comments, downloadAssignment, assignmentList, submission
 #from snippets.views import StudentViewset, ForumViewset, AssignmentsViewset
 from userprofile.views import signup
 
@@ -35,10 +35,14 @@ urlpatterns = [
     path('', frontpage, name='frontpage'),
     path('forum/', forum, name='forum'),
     path('progress/', progress, name='progress'),
-    path('assignments/', assignments, name='assignments'),
+    path('download-assignment/<int:assignment_id>/', downloadAssignment, name='download-assignments'),
+    path('new-assignments/', createAssignment, name='create-assignment'),
+    path('all-assignments/', assignmentList, name='assignments-list'),
     path('forum-detail/<int:forum_id>/', forumDetail, name='forum-detail'),
     path('new-forum/', createNewForum, name='create-forum'),
     path('new-comment/forum=<int:forum_id>-comment=<int:comment_id>/',comments,name='new-comment'),
+    path('submission/<int:assignment_id>/', submission, name='make-submission'),
+
     #Auth
 #    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
 #    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
