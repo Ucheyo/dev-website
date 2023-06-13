@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1 class="title">Make a submission for {{assignment.assignmentTitle}}</h1>
-    <form method="post" action=".">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
        {{form.as_p}} 

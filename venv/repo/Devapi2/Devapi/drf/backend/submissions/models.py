@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from assignments.models import Assignment
 
 import magic
-ext_validator = FileExtensionValidator(['jpg', 'png', 'text', 'pdf'])
+ext_validator = FileExtensionValidator(['jpg', 'png', 'txt', 'pdf'])
 
 def validate_file_mimetype(file):
     accept = ['application/msword', 'text/plain', 'application/pdf', 'image/jpeg', 'image/png']

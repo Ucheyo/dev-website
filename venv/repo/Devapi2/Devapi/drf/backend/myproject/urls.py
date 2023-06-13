@@ -21,6 +21,7 @@ from django.contrib.auth import views # built in views for login and logiut
 from snippets.views import frontpage, forum, progress, createAssignment, forumDetail, createNewForum, comments, downloadAssignment, assignmentList, submission
 #from snippets.views import StudentViewset, ForumViewset, AssignmentsViewset
 from userprofile.views import signup
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 # from rest_framework_simplejwt.views import (
 #     TokenObtainPairView,
@@ -53,6 +54,7 @@ urlpatterns = [
 
 ]
 
+urlpatterns += staticfiles_urlpatterns()
 #modified here
 # router = DefaultRouter()
 # router.register("student", StudentViewset, basename="student")

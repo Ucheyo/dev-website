@@ -61,9 +61,12 @@ def frontpage(request):
         myStudent = Student.objects.get(id=id)    
         context['students']= students
         context['currentStudent']= myStudent         
-        return render(request, 'frontpage.html', context)
+        # return render(request, 'frontpage.html', context)
+        return render(request, 'index.html', context)
+
     else:
-        return render(request, 'frontpage.html')
+        # return render(request, 'frontpage.html')
+        return render(request, 'index.html')
 
 
 def forum(request):
@@ -139,7 +142,7 @@ def progress(request):
 
 def createAssignment(request):
     if request.method =='POST':
-        form = AssignmentCreationForm(request.POST )
+        form = AssignmentCreationForm(request.POST, request.FILES)
 
         if form.is_valid():
             form.save()
@@ -153,7 +156,8 @@ def createAssignment(request):
 def downloadAssignment(request, assignment_id):
     file = Assignment.objects.get(id=assignment_id)
 
-    filePath = file.assignmentUpload.path
+    #filePath = file.assignmentUpload.path
+    filePath = "/home/bluewave/Downloads"
     fileName = file.assignmentUpload.name
 
 
@@ -176,7 +180,7 @@ def submission(request, assignment_id):
     myStudent = Student.objects.get(id=id)
     context['assignment'] = assignment
     if request.method =='POST':
-        form = AssignmentCreationForm(request.POST)
+        form = SubmissionCreationForm(request.POST, request.FILES)
 
         if form.is_valid():
         
