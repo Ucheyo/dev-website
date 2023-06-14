@@ -62,7 +62,7 @@ def frontpage(request):
         context['students']= students
         context['currentStudent']= myStudent         
         # return render(request, 'frontpage.html', context)
-        return render(request, 'index.html', context)
+        return render(request, 'index-2.html', context)
 
     else:
         # return render(request, 'frontpage.html')
