@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style type="text/css">
+        .forum-col {
+            min-width: 16em;
+        }
+        .last-post-col {
+            min-width: 12em
+        }
+        .table-responsive {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+        }
+    </style>
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+        <title>Scholar - Online School HTML5 Template</title>
+    
+        <!-- Bootstrap core CSS -->
+        {% load static %}
+        <link href="{% static 'students/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    
+    
+        <!-- Additional CSS Files -->
+        {% load static %} <link rel="stylesheet" href="{% static 'students/assets/css/fontawesome.css' %}">
+        
+        {% load static %} <link rel="stylesheet" href="{% static 'students/assets/css/templatemo-scholar.css' %}">
+        
+        {% load static %} <link rel="stylesheet" href="{% static 'students/assets/css/owl.css' %}">
+        
+        {% load static %} <link rel="stylesheet" href="{% static 'students/assets/css/animate.css' %}">
+        
+        <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <!--
+    
+    TemplateMo 586 Scholar
+    
+    https://templatemo.com/tm-586-scholar
+    
+    -->
+      </head>
+    
+    <body>
+    
+      <!-- ***** Preloader Start ***** -->
+      <div id="js-preloader" class="js-preloader">
+        <div class="preloader-inner">
+          <span class="dot"></span>
+          <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+      <!-- ***** Preloader End ***** -->
+    
+      <!-- ***** Header Area Start ***** -->
+      <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="{% url 'frontpage' %}" class="logo">
+                            <h1>Home</h1>
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Serach Start ***** -->
+                        <div class="search-input">
+                          <form id="search" action="#">
+                            <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
+                            <i class="fa fa-search"></i>
+                          </form>
+                        </div>
+                        <!-- ***** Serach Start ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                          <li class="scroll-to-section"><a href="{% url 'frontpage' %}" class="active">Home</a></li>
+                          <li class="scroll-to-section"><a href="#services">Services</a></li>
+                          <li class="scroll-to-section"><a href="#courses">Courses</a></li>
+                          <li class="scroll-to-section"><a href="{% url 'forum' %}">Forum</a></li>
+                          <li class="scroll-to-section"><a href="{% url 'login' %}">Login</a></li>
+                          <li class="scroll-to-section"><a href="{% url 'signup' %}">Register Now!</a></li>
+                      </ul>   
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                        <h1>Login</h1>
+                    </nav>
+                </div>
+            </div>
+        </div>
+      </header>
+    
+    {% comment %} <body> {% endcomment %}
+        <div class="main-banner" id="top">
+            <div class="container">
+              <div class="row">
+              </div>
+            </div>
+        </div>
+        <section class="section">
+            <div class="container">
+                <nav class="Breadcrum" aria-label="breadcrumbs">
+                    <ul>
+                        <li class="is-active"><a href="#0" aria-current="page"></a></li>
+                    </ul>
+                </nav>
+                <div class="columns is-desktop">
+                    <div class="column is-three-quaters-desktop">
+                        <h2 class="title"><a href="forums-overview.html">Forum category</a></h2>
+  
+                        <div class="table-responsive">
+                        <table class="table is-striped is-bordered is-fullwidth">
+                                <div class="buttons">
+                                    <button class="button is-info"><a href="{% url 'create-forum' %}">Create New Forum</button>
+                                </div>
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="forum-col">Forum</th> <!--this class is custom made-->
+                                    <th scope="col">Comments</th>
+                                    <th scope="col" class="last-post-col">Last post</th> <!--this class is custom made-->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for forum in forums %}
+  
+                                    <tr>
+                                        <td>
+                                            {% comment %} <h3 class="title is-5 is-marginless"><a href="{% url 'forum-detail' myForum %}" class="is-uppercase">Forum name</a></h3> {% endcomment %}
+                                            <h3 class="title is-5 is-marginless"><a href="{% url 'forum-detail' forum.id %}" class="is-uppercase">{{forum.ContentTitle}}</a></h3>
+                                            <p>"{{forum.ContentBody}}.</p>
+                                        </td>
+                                        <td>
+                                            <div>5</div>
+                                        </td>
+                                        <td>
+                                            <h4 class="title is-6 has-text-weight-bold is-marginless"><a href="post.html">Post name</a></h4>
+                                            <div>by <a href="#0">{{forum.students.get_username}}</a></div>
+                                            <div>05 Apr 2017, 20:07</div>
+                                        </td>                                
+                                    </tr>
+  
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        </div>
+                        <h2 class="title"><a href="forums-overview.html">Forum category</a></h2>
+                        <div class="table-responsive">
+            <div class="column is-one-quarter-desktop">
+                <aside>
+                    <div class="column is-block-desktop">
+                        <div class="column is-half-tablet is-full-desktop">
+                            <div class="card">
+                                <header class="card-header">
+                                    <h2 class="card-header-title has-text-centered">Members online</h2>
+                                </header>
+                                <div class="card-content">
+                                    <ul>
+                                        <li><a href="#0">Forum member name</a></li>
+                                        <li><a href="#0">Forum member name</a></li>
+                                        <li><a href="#0">Forum member name</a></li>
+                                        <li><a href="#0">Forum member name</a></li>
+                                        <li><a href="#0">Forum member name</a></li>
+                                        <li><a href="#0">Forum member name</a></li>
+                                        <li><a href="#0">Forum member name</a></li>
+                                    </ul>
+                                    <hr>
+                                    <div class="level is-mobile">
+                                        <div class="level-item">
+                                            <dl class="has-text-centered">
+                                                <dt class="heading">Total:</dt>
+                                                <dd class="subtitle">10</dd>
+                                            </dl>
+                                        </div>
+                                        <div class="level-item">
+                                            <dl class="has-text-centered">
+                                                <dt class="heading">Members:</dt>
+                                                <dd class="subtitle">10</dd>
+                                            </dl>
+                                        </div>
+                                        <div class="level-item">
+                                            <dl class="has-text-centered">
+                                                <dt class="heading">Guests:</dt>
+                                                <dd class="subtitle">10</dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+  
+    
+          <!-- Scripts -->
+      <!-- Bootstrap core JavaScript -->
+      
+      {% load static %} <script src="{% static 'students/vendor/jquery/jquery.min.js' %}"></script>
+      {% load static %} <script src="{% static 'students/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+      {% load static %} <script src="{% static 'students/assets/js/isotope.min.js' %}"></script>
+      {% load static %} <script src="{% static 'students/assets/js/owl-carousel.js' %}"></script>
+      {% load static %} <script src="{% static 'students/assets/js/counter.js' %}"></script>
+      {% load static %} <script src="{% static 'students/assets/js/custom.js' %}"></script>
+    
+    </body>
+    
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            var $navbarBurger = document.getElementById('navToggle');
+            $navbarBurger.addEventListener('click', function() {
+                var target = $navbarBurger.dataset.target;
+                var $target = document.getElementById(target); 
+
+                $navbarBurger.classList.toggle('is-active');
+                $target.classList.toggle('is-active')
+            })
+
+        });
+    </script>
+

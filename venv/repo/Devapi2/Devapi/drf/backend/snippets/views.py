@@ -66,7 +66,7 @@ def frontpage(request):
 
     else:
         # return render(request, 'frontpage.html')
-        return render(request, 'index.html')
+        return render(request, 'index-2.html')
 
 
 def forum(request):
@@ -80,7 +80,7 @@ def forum(request):
          'comments': comments
     }
 
-    return render(request, 'forum.html', context)
+    return render(request, 'forum-new.html', context)
 
 
 def forumDetail(request, forum_id):
@@ -156,8 +156,8 @@ def createAssignment(request):
 def downloadAssignment(request, assignment_id):
     file = Assignment.objects.get(id=assignment_id)
 
-    #filePath = file.assignmentUpload.path
-    filePath = "/home/bluewave/Downloads"
+    filePath = file.assignmentUpload.path
+    #filePath = "/home/bluewave/Downloads"
     fileName = file.assignmentUpload.name
 
 
