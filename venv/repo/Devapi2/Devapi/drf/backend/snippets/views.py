@@ -171,7 +171,7 @@ def downloadAssignment(request, assignment_id):
 
 def assignmentList(request):
     assignment_list = Assignment.objects.all()
-    return render(request, "assignments-list.html", {"assignment_list":assignment_list})
+    return render(request, "assignments-list-new.html", {"assignment_list":assignment_list})
 
 def submission(request, assignment_id):
     context = {}
