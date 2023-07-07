@@ -73,7 +73,7 @@ def forum(request):
     id = request.user.id
     myStudent = Student.objects.get(id=id)
     forums = Forum.objects.all()
-    comments = Comment.objects.all()
+    comments = Comment.objects.get(forumID = )
     context = {
          'currentStudent': myStudent,
          'forums': forums,
@@ -151,7 +151,7 @@ def createAssignment(request):
         form = AssignmentCreationForm()
 
 
-    return render(request, 'create-assignment.html', {'form':form})
+    return render(request, 'create-assignment-new.html', {'form':form})
 
 def downloadAssignment(request, assignment_id):
     file = Assignment.objects.get(id=assignment_id)
@@ -194,7 +194,7 @@ def submission(request, assignment_id):
     else:
         form = SubmissionCreationForm()
         context['form'] = form 
-    return render(request, 'submission.html', context)   
+    return render(request, 'submission-new.html', context)   
 
 def createNewForum(request):
     context = {}
@@ -214,7 +214,7 @@ def createNewForum(request):
     else:
         form = ForumCreationForm()
         context['form'] = form 
-    return render(request, 'create-forum.html', context)
+    return render(request, 'create-forum-new.html', context)
 
 
 

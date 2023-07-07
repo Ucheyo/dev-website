@@ -107,8 +107,10 @@
             </div>
         </div>
   
+        <h1>Make submissions</h1>
+
         {% block content %}
-        <h1 class="title">Create New Assignment</h1>
+        <h1 class="title">Make a submission for {{assignment.assignmentTitle}}</h1>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
     
@@ -117,7 +119,7 @@
     
             <div class="field">
                 <div class="control">
-                    <button class="button is-success">Add Assignment</button>
+                    <button class="button is-success">Submit</button>
                 </div>
             </div>
     
@@ -125,7 +127,8 @@
         
     
     {% endblock %}
-          <!-- Scripts -->
+    
+    <!-- Scripts -->
       <!-- Bootstrap core JavaScript -->
       
       {% load static %} <script src="{% static 'students/vendor/jquery/jquery.min.js' %}"></script>

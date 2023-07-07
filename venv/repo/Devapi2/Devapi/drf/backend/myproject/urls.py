@@ -21,6 +21,7 @@ from django.contrib.auth import views # built in views for login and logiut
 from snippets.views import frontpage, forum, progress, createAssignment, forumDetail, createNewForum, comments, downloadAssignment, assignmentList, submission
 #from snippets.views import StudentViewset, ForumViewset, AssignmentsViewset
 from userprofile.views import signup
+from userprofile.forms import UserLoginForm
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 # from rest_framework_simplejwt.views import (
@@ -50,7 +51,7 @@ urlpatterns = [
 
     path('signup/', signup, name='signup'),
     path('logout/', views.LogoutView.as_view(), name='logout'),
-    path('login/', views.LoginView.as_view(template_name='login.html'), name='login')
+    path('login/', views.LoginView.as_view(template_name='login.html', authentication_form=UserLoginForm), name='login')
 
 ]
 
