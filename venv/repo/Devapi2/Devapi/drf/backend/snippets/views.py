@@ -103,7 +103,7 @@ def forumDetail(request, forum_id):
 
     
 
-    return render(request, 'forum-detail.html', context)
+    return render(request, 'forum-detail-new.html', context)
 
 
 
@@ -137,7 +137,7 @@ def progress(request):
         context['form'] = form
         
         
-    return render(request, 'progress.html',context)
+    return render(request, 'progress-new.html',context)
 
 
 def createAssignment(request):

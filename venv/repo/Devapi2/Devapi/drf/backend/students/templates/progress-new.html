@@ -94,19 +94,26 @@ https://templatemo.com/tm-586-scholar
         </div>
     </div>
     {% block content %}
-    <h1 class="title">Sign up</h1>
-    <form method="post" action=".">
-        {% csrf_token %}
+    <h1 class ="title">The progress</h1>
+    {% if request.user.is_authenticated %}
+    {% csrf_token %}
+        <p>Welcome, {{ user.get_username }}. Thanks for logging in.</p>
+        <p>Please fill in what class you are in</p>
+        <form method="post">
 
-        {{form.as_p}} 
+            {% csrf_token %}
+    
+            {{ form.as_p }}
+    
+            <button class="button is-success is-fullwidth is-medium mt-5"
+    
+                    type="submit">Submit
+    
+            </button>
+    
+        </form>
+    {% endif %}
 
-        <div class="field">
-            <div class="control">
-                <button class="button is-success">Sign up</button>
-            </div>
-        </div>
-
-    </form>
     {% endblock %}
       <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->

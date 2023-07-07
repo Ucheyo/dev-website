@@ -82,7 +82,7 @@
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                           <li class="scroll-to-section"><a href="{% url 'frontpage' %}" class="active">Home</a></li>
-                          <li class="scroll-to-section"><a href="{% url 'progress' %}">Progress</a></li>
+                          <li class="scroll-to-section"><a href="#services">Services</a></li>
                           <li class="scroll-to-section"><a href="{% url 'assignments-list' %}">Assignments</a></li>
                           <li class="scroll-to-section"><a href="{% url 'forum' %}">Forum</a></li>
                           <li class="scroll-to-section"><a href="{% url 'login' %}">Login</a></li>
@@ -99,15 +99,8 @@
         </div>
       </header>
     
-    {% comment %} <body> {% endcomment %}
-        <div class="main-banner" id="top">
-            <div class="container">
-              <div class="row">
-              </div>
-            </div>
-        </div>
-  
-        <h1>Download File using Django</h1>
+
+    <h1>Download File using Django</h1>
 
     <div class="table-responsive">
         <table class="table is-striped is-bordered is-fullwidth">    
@@ -143,10 +136,8 @@
             </tbody>
         </table>
     </div>
-    <div>
-        <p><a href="{% url 'create-assignment' %}"> Create new assignment</a></p>
-    </div>
-          <!-- Scripts -->
+
+              <!-- Scripts -->
       <!-- Bootstrap core JavaScript -->
       
       {% load static %} <script src="{% static 'students/vendor/jquery/jquery.min.js' %}"></script>
@@ -155,8 +146,5 @@
       {% load static %} <script src="{% static 'students/assets/js/owl-carousel.js' %}"></script>
       {% load static %} <script src="{% static 'students/assets/js/counter.js' %}"></script>
       {% load static %} <script src="{% static 'students/assets/js/custom.js' %}"></script>
-    
     </body>
-    
-    </script>
 
